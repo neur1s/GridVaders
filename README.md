@@ -21,7 +21,7 @@
 * Muhammad Mushhood Ur Rehman, MSc in Public Health (University of Edinburgh, UK)
 * Kate Tabor, PhD in Neuroscience (University of Washington, USA)
 * Souvik Bhattacharya, Ph.D. student in Computer Science (University of Illinois, USA)
-* Leticia Cid
+* Leticia Cid, BASc, Research Assistant (University of British Columbia, CA)
 
 ### Project TA
 Mostafa Miandary Hossein
