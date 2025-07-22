@@ -50,7 +50,7 @@ def sample_n_back_spatial(n, max_length=40, grid_size=np.array([5, 5], dtype=int
         
     trajectory = np.array(trajectory)
 
-    n_back_idx = np.array([loc2idx(trajectory[i], grid_size=grid_size) for i in range(max_length-n)])
+    n_back_idx = np.array([loc2idx(trajectory[i], grid_size=grid_size) for i in range(max_length-n+1)])
 
     if return_trajectory:
         return movements, n_back_idx, trajectory
