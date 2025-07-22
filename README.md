@@ -27,4 +27,4 @@
 Mostafa Miandary Hossein
 
 ### Regular TA
-Karthika Kamath
+Karthika Kamath (University of Birmingham, UK)
