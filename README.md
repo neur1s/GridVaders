@@ -12,7 +12,7 @@
 
 
 ### Contribuitors:
-* Ítalo Karmann Aventurato
+* Ítalo Karmann Aventurato, PhD Candidate (Universidade Estadual de Campinas, BR)
 * Sofiya Zbaranska, PhD Candidate (University of Toronto, CA)
 * Arthur Rodrigues
 * Setareh Metanat, PhD, Research Assistant (University of California San Diego, USA)
