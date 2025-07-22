@@ -14,7 +14,7 @@
 ### Contribuitors:
 * Ítalo Karmann Aventurato, PhD Candidate (Universidade Estadual de Campinas, BR)
 * Sofiya Zbaranska, PhD Candidate (University of Toronto, CA)
-* Arthur Rodrigues
+* Arthur Rodrigues, MSc Student (Universidade Federal de Minas Gerais, BR)
 * Setareh Metanat, PhD, Research Assistant (University of California San Diego, USA)
 * Didi Ramsaran Chin, BSc in Psychology (Universidad catòlica Andrés Bello, VE)
 * Sara Asadi, MSc Student (University of Lethbridge, CA)
