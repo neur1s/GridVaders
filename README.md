@@ -1,5 +1,3 @@
-# GridVaders
-
 <table>
   <tr>
     <td>
@@ -11,9 +9,9 @@
     </td>
   </tr>
 </table>
-## Comparing neural networks performing spatial navigation in a 2D gridlike world
 
-### Part of Neuromatch's neuroAI 2025 Academy
+### Part of Neuromatch's NeuroAI 2025 Academy
+
 
 ### Contribuitors:
 * Ítalo Karmann Aventurato
