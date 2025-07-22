@@ -1,6 +1,6 @@
 # GridVaders
 
-<img width="768" height="768" alt="image" src="https://github.com/user-attachments/assets/f2c04a67-e508-4aaf-a040-f6b3166a42c8" />
+<img width="800" height="648" alt="image" src="https://github.com/user-attachments/assets/c3d723e1-7015-4803-83c4-4fe8e0eb7905" />
 
 ## Comparing neural networks performing spatial navigation in a 2D gridlike world
 
