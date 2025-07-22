@@ -1,4 +1,5 @@
-# GridVaders
+# GridVaders <img width="256" height="256" alt="image" src="https://github.com/user-attachments/assets/a368c423-cdc0-4659-9b5f-6edf70e73c86" />
+
 ## Comparing neural networks performing spatial navigation in a 2D gridlike world
 
 ### Part of Neuromatch's neuroAI 2025 Academy
