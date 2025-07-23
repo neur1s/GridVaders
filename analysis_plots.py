@@ -4,9 +4,10 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 from umap import UMAP
 
-def plot_hidden_tsne(model, dataset, step_pos=-1, step_hidden=-1, label_over=False):
+def plot_hidden(model, dataset, step_pos=-1, step_hidden=-1, method='tsne', label_over=False, n_back=None):
 
     assert step_hidden != 0, "Step zero has trivial representation."
+    assert method in ['tsne', 'umap', 'pca']
     
     model.eval()
     
@@ -15,14 +16,22 @@ def plot_hidden_tsne(model, dataset, step_pos=-1, step_hidden=-1, label_over=Fal
 
     hidden_states = hidden_states.cpu().numpy()[:,step_hidden]
     np.random.seed(0)
-    transformed = TSNE(2).fit_transform(hidden_states)
+    if method == 'tsne':
+        transformed = TSNE(2).fit_transform(hidden_states)
+        method = 't-SNE'
+    elif method == 'umap':
+        transformed = UMAP().fit_transform(hidden_states)
+        method = 'UMAP'
+    elif method == 'pca':
+        transformed = PCA(2).fit_transform(hidden_states)
+        method = 'PCA'
 
     labels = np.array([str(idx2loc(idx)) for idx in analysis_dataset.y.numpy()[:,step_pos]])
     
     sns.set()
     sns.scatterplot(x=transformed[:,0], y=transformed[:,1], hue=labels)
     
-    plt.title(f't-SNE of Hidden-states at step {step_hidden} colored according to position at step {step_pos}')
+    plt.title(f'{method} of Hidden-states at step {step_hidden}\n colored according to position at step {step_pos} (N={n_back})')
     plt.xlabel('Dim 1')
     plt.ylabel('Dim 2')
     plt.legend(loc='center right', prop={'size': 7}, fancybox=True, shadow=True)
@@ -32,10 +41,12 @@ def plot_hidden_tsne(model, dataset, step_pos=-1, step_hidden=-1, label_over=Fal
         for label in np.unique(labels):
             pos = transformed[labels == label].mean(axis=0)
             plt.text(pos[0], pos[1], label, horizontalalignment='center', verticalalignment='top')
+            
 
-def plot_hidden_umap(model, dataset, step_pos=-1, step_hidden=-1, label_over=False):
+def plot_hidden_3d(model, dataset, step_pos=-1, step_hidden=-1, method='tsne', label_over=False, n_back=None):
 
     assert step_hidden != 0, "Step zero has trivial representation."
+    assert method in ['tsne', 'pca']
     
     model.eval()
     
@@ -44,16 +55,28 @@ def plot_hidden_umap(model, dataset, step_pos=-1, step_hidden=-1, label_over=Fal
 
     hidden_states = hidden_states.cpu().numpy()[:,step_hidden]
     np.random.seed(0)
-    transformed = UMAP().fit_transform(hidden_states)
-    
+    if method == 'tsne':
+        transformed = TSNE(3).fit_transform(hidden_states)
+        method = 't-SNE'
+    elif method == 'pca':
+        transformed = PCA(3).fit_transform(hidden_states)
+        method = 'PCA'
+
     labels = np.array([str(idx2loc(idx)) for idx in analysis_dataset.y.numpy()[:,step_pos]])
     
     sns.set()
-    sns.scatterplot(x=transformed[:,0], y=transformed[:,1], hue=labels)
+
+    fig = plt.figure(figsize=(8, 6))
+    ax = fig.add_subplot(111, projection='3d')
+    colors = sns.color_palette(n_colors=len(np.unique(labels)))
     
-    plt.title(f't-SNE of Hidden-states at step {step_hidden} colored according to position at step {step_pos}')
+    for color, label in zip(colors, np.unique(labels)):
+        ax.scatter(transformed[labels == label,0], transformed[labels == label,1], transformed[labels == label,2], color=color, label=label)
+    
+    plt.title(f'{method} of Hidden-states at step {step_hidden}\n colored according to position at step {step_pos} (N={n_back})')
     plt.xlabel('Dim 1')
     plt.ylabel('Dim 2')
+    ax.set(zlabel='Dim 3')
     plt.legend(loc='center right', prop={'size': 7}, fancybox=True, shadow=True)
 
     if label_over:
@@ -62,37 +85,6 @@ def plot_hidden_umap(model, dataset, step_pos=-1, step_hidden=-1, label_over=Fal
             pos = transformed[labels == label].mean(axis=0)
             plt.text(pos[0], pos[1], label, horizontalalignment='center', verticalalignment='top')
 
-
-def plot_hidden_pca(model, dataset, step_pos=-1, step_hidden=-1, label_over=False):
-
-    assert step_hidden != 0, "Step zero has trivial representation."
-    
-    
-    model.eval()
-    
-    with torch.no_grad():
-        _, hidden_states = model.forward(dataset.x.to(device), return_hidden=True)
-
-    hidden_states = hidden_states.cpu().numpy()[:,step_hidden]
-    np.random.seed(0)
-    transformed = PCA(2).fit_transform(hidden_states)
-    
-    labels = np.array([str(idx2loc(idx)) for idx in analysis_dataset.y.numpy()[:,step_pos]])
-    
-    sns.set()
-    sns.scatterplot(x=transformed[:,0], y=transformed[:,1], hue=labels)
-    
-    plt.title(f't-SNE of Hidden-states at step {step_hidden} colored according to position at step {step_pos}')
-    plt.xlabel('Dim 1')
-    plt.ylabel('Dim 2')
-    plt.legend(loc='center right', prop={'size': 7}, fancybox=True, shadow=True)
-
-    if label_over:
-        plt.legend('', frameon=False)
-        for label in np.unique(labels):
-            pos = transformed[labels == label].mean(axis=0)
-            plt.text(pos[0], pos[1], label, horizontalalignment='center', verticalalignment='top')
-    
     
 def scree_plot(model, dataset, plot_components=50):
     model.eval()
