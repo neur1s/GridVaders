@@ -28,7 +28,7 @@ def plot_hidden(model, dataset, step_pos=-1, step_hidden=-1, method='tsne', labe
         transformed = PCA(2).fit_transform(hidden_states)
         method = 'PCA'
 
-    labels = np.array([str(idx2loc(idx)) for idx in analysis_dataset.y.numpy()[:,step_pos]])
+    labels = np.array([str(idx2loc(idx)) for idx in dataset.y.numpy()[:,step_pos]])
     
     sns.set()
     sns.scatterplot(x=transformed[:,0], y=transformed[:,1], hue=labels)
@@ -64,7 +64,7 @@ def plot_hidden_3d(model, dataset, step_pos=-1, step_hidden=-1, method='tsne', l
         transformed = PCA(3).fit_transform(hidden_states)
         method = 'PCA'
 
-    labels = np.array([str(idx2loc(idx)) for idx in analysis_dataset.y.numpy()[:,step_pos]])
+    labels = np.array([str(idx2loc(idx)) for idx in dataset.y.numpy()[:,step_pos]])
     
     sns.set()
 
@@ -118,7 +118,7 @@ def past_coding_plot(model, dataset, n_back_max, plot_components=50):
     num_classes = logits.size()[1]
     num_components = transformed.shape[1]
     
-    y = F.one_hot(analysis_dataset.y, num_classes=num_classes).numpy()
+    y = F.one_hot(dataset.y, num_classes=num_classes).numpy()
 
     r2_matrix = np.zeros([n_back_max, num_components])
     
