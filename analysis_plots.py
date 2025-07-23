@@ -2,8 +2,9 @@ from sklearn.manifold import TSNE
 from sklearn.decomposition import PCA, FastICA
 import seaborn as sns
 import matplotlib.pyplot as plt
+from umap import UMAP
 
-def plot_hidden_tsne(model, dataset, step_pos=-1, step_hidden=-1):
+def plot_hidden_tsne(model, dataset, step_pos=-1, step_hidden=-1, label_over=False):
 
     assert step_hidden != 0, "Step zero has trivial representation."
     
@@ -15,15 +16,54 @@ def plot_hidden_tsne(model, dataset, step_pos=-1, step_hidden=-1):
     hidden_states = hidden_states.cpu().numpy()[:,step_hidden]
     np.random.seed(0)
     transformed = TSNE(2).fit_transform(hidden_states)
+
+    labels = np.array([str(idx2loc(idx)) for idx in analysis_dataset.y.numpy()[:,step_pos]])
     
     sns.set()
-    sns.scatterplot(x=transformed[:,0], y=transformed[:,1], hue=analysis_dataset.y.numpy()[:,step_pos].astype('str'))
-    plt.legend('', frameon=False)
+    sns.scatterplot(x=transformed[:,0], y=transformed[:,1], hue=labels)
+    
     plt.title(f't-SNE of Hidden-states at step {step_hidden} colored according to position at step {step_pos}')
     plt.xlabel('Dim 1')
     plt.ylabel('Dim 2')
+    plt.legend(loc='center right', prop={'size': 7}, fancybox=True, shadow=True)
 
-def plot_hidden_pca(model, dataset, step_pos=-1, step_hidden=-1):
+    if label_over:
+        plt.legend('', frameon=False)
+        for label in np.unique(labels):
+            pos = transformed[labels == label].mean(axis=0)
+            plt.text(pos[0], pos[1], label, horizontalalignment='center', verticalalignment='top')
+
+def plot_hidden_umap(model, dataset, step_pos=-1, step_hidden=-1, label_over=False):
+
+    assert step_hidden != 0, "Step zero has trivial representation."
+    
+    model.eval()
+    
+    with torch.no_grad():
+        _, hidden_states = model.forward(dataset.x.to(device), return_hidden=True)
+
+    hidden_states = hidden_states.cpu().numpy()[:,step_hidden]
+    np.random.seed(0)
+    transformed = UMAP().fit_transform(hidden_states)
+    
+    labels = np.array([str(idx2loc(idx)) for idx in analysis_dataset.y.numpy()[:,step_pos]])
+    
+    sns.set()
+    sns.scatterplot(x=transformed[:,0], y=transformed[:,1], hue=labels)
+    
+    plt.title(f't-SNE of Hidden-states at step {step_hidden} colored according to position at step {step_pos}')
+    plt.xlabel('Dim 1')
+    plt.ylabel('Dim 2')
+    plt.legend(loc='center right', prop={'size': 7}, fancybox=True, shadow=True)
+
+    if label_over:
+        plt.legend('', frameon=False)
+        for label in np.unique(labels):
+            pos = transformed[labels == label].mean(axis=0)
+            plt.text(pos[0], pos[1], label, horizontalalignment='center', verticalalignment='top')
+
+
+def plot_hidden_pca(model, dataset, step_pos=-1, step_hidden=-1, label_over=False):
 
     assert step_hidden != 0, "Step zero has trivial representation."
     
@@ -37,13 +77,21 @@ def plot_hidden_pca(model, dataset, step_pos=-1, step_hidden=-1):
     np.random.seed(0)
     transformed = PCA(2).fit_transform(hidden_states)
     
+    labels = np.array([str(idx2loc(idx)) for idx in analysis_dataset.y.numpy()[:,step_pos]])
+    
     sns.set()
-    sns.scatterplot(x=transformed[:,0], y=transformed[:,1], hue=analysis_dataset.y.numpy()[:,step_pos].astype('str'))
-    plt.legend('', frameon=False)
-
-    plt.title(f'PCA of Hidden-states at step {step_hidden} colored according to position at step {step_pos}')
+    sns.scatterplot(x=transformed[:,0], y=transformed[:,1], hue=labels)
+    
+    plt.title(f't-SNE of Hidden-states at step {step_hidden} colored according to position at step {step_pos}')
     plt.xlabel('Dim 1')
     plt.ylabel('Dim 2')
+    plt.legend(loc='center right', prop={'size': 7}, fancybox=True, shadow=True)
+
+    if label_over:
+        plt.legend('', frameon=False)
+        for label in np.unique(labels):
+            pos = transformed[labels == label].mean(axis=0)
+            plt.text(pos[0], pos[1], label, horizontalalignment='center', verticalalignment='top')
     
     
 def scree_plot(model, dataset, plot_components=50):
