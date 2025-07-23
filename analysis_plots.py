@@ -3,6 +3,8 @@ from sklearn.decomposition import PCA, FastICA
 import seaborn as sns
 import matplotlib.pyplot as plt
 from umap import UMAP
+from scipy import stats, spatial
+import pandas as pd
 
 def plot_hidden(model, dataset, step_pos=-1, step_hidden=-1, method='tsne', label_over=False, n_back=None):
 
@@ -138,4 +140,58 @@ def past_coding_plot(model, dataset, n_back_max, plot_components=50):
     plt.title('Explained variance of last state IC by previous positions')
     plt.xlabel('Independent Component')
     plt.ylabel('Delay')
+    plt.show()
+    
+    
+def plot_spatial_correlation(model, dataset, step_pos=-1, step_hidden=-1, n_back=None):
+
+    assert step_hidden != 0, "Step zero has trivial representation."
+    
+    model.eval()
+    
+    with torch.no_grad():
+        _, hidden_states = model.forward(dataset.x.to(device), return_hidden=True)
+
+    hidden_states = hidden_states.cpu().numpy()[:,step_hidden]
+    grid_positions = dataset.y.numpy()[:,step_pos]
+    
+    # Calculate ACTUAL grid distances
+    positions = np.array([(p//5, p%5) for p in grid_positions])
+    grid_dists = spatial.distance.pdist(positions.astype(float))
+    
+    # Calculate hidden state distances
+    hidden_dists = spatial.distance.pdist(hidden_states)
+    
+    corr, p_value = stats.pearsonr(grid_dists, hidden_dists)
+    
+    # Bin by integer distances (0,1,2,3,4,5,6)
+    df = pd.DataFrame({
+        'Grid Distance': grid_dists,
+        'Hidden Distance': hidden_dists,
+        'Distance Bin': np.floor(grid_dists).astype(int)  # Bin by integer part
+    })
+    
+    # Plot
+    sns.set()
+    plt.figure(figsize=(5,5))
+    sns.set_style("white")
+    ax = sns.regplot(
+        data=df,
+        x='Grid Distance',
+        y='Hidden Distance',
+        ci=None,
+        marker='.',
+        scatter_kws={'alpha':0.05},
+        line_kws={'color':'r'}
+    )
+    ax.grid(False)
+    
+    # Label with actual distance ranges
+    # bin_labels = [f"{int(bin)}-{int(bin)+1}" for bin in sorted(df['Distance Bin'].unique())]
+    # plt.xticks(ticks=range(len(bin_labels)), labels=bin_labels)
+    
+    plt.title(f"{n_back}-back task, hidden state {step_hidden} and position at step {step_pos}\nSpatial Correlation (r = {corr:.3f}, p = {p_value:.3f})")
+    plt.xlabel("Actual Grid Distance Range (units)")
+    plt.ylabel("Hidden State Distance")
+    plt.tight_layout()
     plt.show()
