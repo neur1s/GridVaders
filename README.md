@@ -16,7 +16,7 @@
 * Sofiya Zbaranska, PhD Candidate (University of Toronto, CA)
 * Arthur Rodrigues, MSc Student (Universidade Federal de Minas Gerais, BR)
 * Setareh Metanat, BSc in Cognitive Science, Research Assistant (University of California San Diego, USA)
-* Didi Ramsaran Chin, BSc in Psychology (Universidad Católica Andrés Bello, VE)
+* [Didi Ramsaran Chin](https://neurodidi.github.io/), BSc in Psychology (Universidad Católica Andrés Bello, VE)
 * Sara Asadi, MSc Student (University of Lethbridge, CA)
 * Muhammad Mushhood Ur Rehman, MSc in Public Health (University of Edinburgh, UK)
 * Kate Tabor, PhD in Neuroscience (University of Washington, USA)
