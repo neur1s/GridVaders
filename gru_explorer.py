@@ -5,6 +5,8 @@ import numpy as np
 from torch.utils.data import Dataset, DataLoader
 from n_back_spatial_task import *
 
+device = torch.accelerator.current_accelerator().type if torch.accelerator.is_available() else "cpu"
+
 class GRUExplorer(nn.Module):
     
     def __init__(self, hidden_state_size, num_layers=1, grid_size=np.array([5, 5], dtype=int), dropout=0.2):
