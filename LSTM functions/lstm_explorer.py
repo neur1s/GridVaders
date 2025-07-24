@@ -8,7 +8,7 @@ import torch.nn.functional as F
 from n_back_spatial_task import create_n_back_dataset, NBackDataset as ItaloNBackDataset
 
 # Configuration constants
-SEED = 42
+SEED = 0
 GRID_SIZE = np.array([5, 5], dtype=int)
 HIDDEN_SIZE = 128
 INPUT_SIZE = 4 
@@ -16,7 +16,7 @@ OUTPUT_SIZE = GRID_SIZE[0] * GRID_SIZE[1]
 DEVICE = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
 SEQ_LENGTH = 50
 BATCH_SIZE = 100
-LEARNING_RATE = 0.0005
+LEARNING_RATE = 0.001
 EPOCHS = 50
 BOUNDARY = 'strict'
 
@@ -135,7 +135,7 @@ def sample_and_train(n_back, epochs=EPOCHS):
     accuracy, test_loss = test(model, n_back)
     return model, accuracy, test_loss, train_loss
 
-def get_hidden_states(model, dataset, time_step, n_back):
+def get_hidden_states(model, dataset, time_step, n_back, max_samples=1000):
     model.eval()
     loader = DataLoader(dataset, batch_size=BATCH_SIZE)
     all_hidden_states = []
@@ -144,6 +144,8 @@ def get_hidden_states(model, dataset, time_step, n_back):
     
     with torch.no_grad():
         for actions, targets in loader:
+            if len(all_hidden_states) >= max_samples:
+                break
             actions, targets = actions.to(DEVICE), targets.to(DEVICE)
             _, hidden_states = model(actions, return_hidden=True)
             
