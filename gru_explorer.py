@@ -1,6 +1,7 @@
 import torch.nn.functional as F
 from torch import nn
 from torch import optim
+import numpy as np
 
 class GRUExplorer(nn.Module):
     
