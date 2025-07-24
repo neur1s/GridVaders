@@ -1,4 +1,4 @@
-# GridVaders
+# Space Invaders (aka GridVaders)
 
 <div align="center">
   <img width="200" height="162" alt="GridVaders banner" src="https://github.com/user-attachments/assets/770fd05d-eb85-4771-a135-8676553c1822" />

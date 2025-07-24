@@ -1,6 +1,11 @@
 import torch.nn.functional as F
 from torch import nn
 from torch import optim
+import numpy as np
+from torch.utils.data import Dataset, DataLoader
+from n_back_spatial_task import *
+
+device = torch.accelerator.current_accelerator().type if torch.accelerator.is_available() else "cpu"
 
 class GRUExplorer(nn.Module):
     
