@@ -5,7 +5,13 @@ from sklearn.manifold import TSNE
 from scipy.stats import pearsonr, stats
 from scipy.spatial import distance
 import pandas as pd
-from lstm_explorer import SEED
+# Try both import methods
+try:
+    # For when running from notebook in parent directory
+    from LSTM_functions.lstm_explorer import SEED
+except ImportError:
+    # For when running standalone
+    from lstm_explorer import SEED
 
 def plot_tsne(hidden_states, current_positions, nback_positions, n_back, step_hidden=40):
     """Plot two t-SNE plots side by side comparing current vs n-back positions"""
@@ -20,7 +26,7 @@ def plot_tsne(hidden_states, current_positions, nback_positions, n_back, step_hi
     nback_ids = to_grid_ids(nback_positions)
     
     np.random.seed(SEED)
-    transformed = TSNE(n_components=2, perplexity=30, n_iter=1000, random_state=SEED).fit_transform(hidden_states)
+    transformed = TSNE(n_components=2, perplexity=30, random_state=SEED).fit_transform(hidden_states)
     
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(16, 6))
     

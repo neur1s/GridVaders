@@ -21,7 +21,7 @@ def plot_tsne(hidden_states, current_positions, nback_positions, n_back, step_hi
     nback_ids = to_grid_ids(nback_positions)
     
     np.random.seed(42)
-    transformed = TSNE(n_components=2, perplexity=30, n_iter=1000, random_state=42).fit_transform(hidden_states)
+    transformed = TSNE(n_components=2, perplexity=30, random_state=42).fit_transform(hidden_states)
     
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(16, 6))
     
@@ -66,7 +66,7 @@ def calculate_spatial_correlation(hidden_states, grid_positions):
     # Flatten the matrices and compute correlation
     grid_flat = grid_dists[np.triu_indices_from(grid_dists, k=1)]
     hidden_flat = hidden_dists[np.triu_indices_from(hidden_dists, k=1)]
-    corr, p_value = pearsonr(grid_flat, hidden_flat)
+    corr, p_value = stats.pearsonr(grid_flat, hidden_flat)
     
     return corr, p_value, grid_dists, hidden_dists
 
