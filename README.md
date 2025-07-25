@@ -68,7 +68,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 * Setareh Metanat, BSc in Cognitive Science, Research Assistant (University of California San Diego, USA)
 * [Didi Ramsaran Chin](https://neurodidi.github.io/), BSc in Psychology (Universidad Católica Andrés Bello, VE)
 * Sara Asadi, MSc Student (University of Lethbridge, CA)
-* Muhammad Mushhood Ur Rehman, MSc in Public Health (University of Edinburgh, UK)
+* [Muhammad Mushhood Ur Rehman](https://www.linkedin.com/in/RehmanMushhood), Masters in Public Health Student (University of Edinburgh, UK)
 * Kate Tabor, PhD in Neuroscience (University of Washington, USA)
 * Souvik Bhattacharya, Ph.D. Student in Computer Science (University of Illinois, USA)
 * Leticia Cid, BASc, Research Assistant (University of British Columbia, CA)
