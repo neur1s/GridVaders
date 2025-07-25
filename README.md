@@ -2,7 +2,7 @@
 
 ## Neuromatch NeuroAI 2025 Academy Project: Comparing neural networks performing spatial memory task in a 2D grid world
 
-This project explores and compares the performance of different recurrent neural network (RNN) architectures—Vanilla RNN, Long Short-Term Memory (LSTM), and Gated Recurrent Unit (GRU)—on a synthetic spatial navigation task. The models are trained on an n-back task set in a 2D grid world, where the model takes random moves (up, down, left or right) in a 5x5 grid world and has to predict its location 'n' steps ago. This repository provides the complete codebase for model implementation, experimental execution, and analysis of memory capacity, spatial representations, and cross-model differences in these representations.
+This project explores and compares the performance of different recurrent neural network (RNN) architectures—Vanilla RNN, Long Short-Term Memory (LSTM), and Gated Recurrent Unit (GRU)—on a synthetic spatial navigation task. The models are trained on an N-back task set in a 2D grid world, where the model takes random moves (up, down, left or right) in a 5x5 grid world and has to predict its location 'N' steps ago. This repository provides the complete codebase for model implementation, experimental execution, and analysis of memory capacity, spatial representations, and cross-model differences in these representations.
 
 <div align="center">
   <img alt="GridVaders banner" src="https://github.com/user-attachments/assets/4913e710-1833-4ab3-b81e-6013b3ba903c" />
@@ -17,10 +17,10 @@ This project explores and compares the performance of different recurrent neural
 
 ## Results
 
-The notebooks contain the code to train, test the models, and visualize the results. The analysis includes accuracy plots across different 'n' values in the n-back task, t-SNE/PCA visualizations of the RNN hidden states to understand how the models represent the grid space, and Pearson correlation analyses to assess whether the similarity between hidden representations reflects the physical distances between locations in the gridworld (whether spatial structure is preserved in the neural network embeddings). In addition, we performed representational similarity analysis to examine how these spatial representations compare across the RNNs. The example results below demonstrate that the models successfully learned both the memory task and the spatial structure of the grid world, with LSTMs and GRUs exhibiting highly similar representations.
+The notebooks contain the code to train, test the models, and visualize the results. The analysis includes accuracy plots across different 'N' values in the N-back task, t-SNE/PCA visualizations of the RNN hidden states to understand how the models represent the grid space, and Pearson correlation analyses to assess whether the similarity between hidden representations reflects the physical distances between locations in the gridworld (whether spatial structure is preserved in the neural network embeddings). In addition, we performed representational similarity analysis to examine how these spatial representations compare across the RNNs. The example results below demonstrate that the models successfully learned both the memory task and the spatial structure of the grid world (fully implicitly!), with LSTMs and GRUs exhibiting highly similar representations.
 
 <div align="center">
-  <img alt="Results" src="https://github.com/user-attachments/assets/82a90f60-8bca-4c3a-a5d9-82dceb3412f4" />
+  <img alt="Results" src="https://github.com/user-attachments/assets/39d762f2-8a90-451d-93d0-b6ff96d94c17" />
 </div>
 
 ## Repository Structure
