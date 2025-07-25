@@ -5,6 +5,11 @@ import matplotlib.pyplot as plt
 from umap import UMAP
 from scipy import stats, spatial
 import pandas as pd
+import torch
+import torch.nn.functional as F
+import numpy as np
+
+device = torch.accelerator.current_accelerator().type if torch.accelerator.is_available() else "cpu"
 
 def plot_hidden(model, dataset, step_pos=-1, step_hidden=-1, method='tsne', label_over=False, n_back=None):
 
@@ -105,7 +110,7 @@ def scree_plot(model, dataset, plot_components=50):
     plt.ylabel('Variance Explained')
     plt.show()
     
-def past_coding_plot(model, dataset, n_back_max, plot_components=50):
+def past_coding_plot(model, dataset, n_back_max, plot_components=50, model_name=None):
     
     model.eval()
     
@@ -137,7 +142,7 @@ def past_coding_plot(model, dataset, n_back_max, plot_components=50):
     im = ax.imshow(r2_matrix_, aspect='auto', interpolation='nearest')
     cbar = plt.colorbar(im)
     sns.reset_orig()
-    plt.title('Explained variance of last state IC by previous positions')
+    plt.title(f'Explained variance of last state IC by previous positions ({model_name})')
     plt.xlabel('Independent Component')
     plt.ylabel('Delay')
     plt.show()
