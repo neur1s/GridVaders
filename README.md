@@ -1,11 +1,12 @@
 # Space Invaders (aka GridVaders)
-<div align="center">
-  <img width="200" height="162" alt="GridVaders banner" src="https://github.com/user-attachments/assets/770fd05d-eb85-4771-a135-8676553c1822" />
-</div>
 
-## Neuromatch NeuroAI 2025 Academy Project: Comparing neural networks performing spatial navigation in a 2D grid world
+## Neuromatch NeuroAI 2025 Academy Project: Comparing neural networks performing spatial memory task in a 2D grid world
 
 This project explores and compares the performance of different recurrent neural network (RNN) architectures—Vanilla RNN, Long Short-Term Memory (LSTM), and Gated Recurrent Unit (GRU)—on a synthetic spatial navigation task. The models are trained on an n-back task set in a 2D grid world, where the model takes random moves (up, down, left or right) in a 5x5 grid world and has to predict its location 'n' steps ago. This repository provides the complete codebase for model implementation, experimental execution, and analysis of memory capacity, spatial representations, and cross-model differences in these representations.
+
+<div align="center">
+  <img alt="GridVaders banner" src="https://github.com/user-attachments/assets/4913e710-1833-4ab3-b81e-6013b3ba903c" />
+</div>
 
 ## Features
 
