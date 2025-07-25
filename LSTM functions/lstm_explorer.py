@@ -10,7 +10,7 @@ from n_back_spatial_task import create_n_back_dataset, NBackDataset as ItaloNBac
 # Configuration constants
 SEED = 0
 GRID_SIZE = np.array([5, 5], dtype=int)
-HIDDEN_SIZE = 128
+HIDDEN_SIZE = 256
 INPUT_SIZE = 4 
 OUTPUT_SIZE = GRID_SIZE[0] * GRID_SIZE[1]
 DEVICE = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
