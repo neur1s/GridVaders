@@ -15,6 +15,14 @@ This project explores and compares the performance of different recurrent neural
 *   Scripts for generating training data, training and evaluation the models.
 *   Analysis and visualization of model performance and hidden state representations using t-SNE and representational similarity analysis.
 
+## Results
+
+The notebooks contain the code to train, test the models, and visualize the results. The analysis includes accuracy plots across different 'n' values in the n-back task, t-SNE/PCA visualizations of the RNN hidden states to understand how the models represent the grid space, and Pearson correlation analyses to assess whether the similarity between hidden representations reflects the physical distances between locations in the gridworld (whether spatial structure is preserved in the neural network embeddings). In addition, we performed representational similarity analysis to examine how these spatial representations compare across the RNNs. The example results below demonstrate that the models successfully learned both the memory task and the spatial structure of the grid world, with LSTMs and GRUs exhibiting highly similar representations.
+
+<div align="center">
+  <img alt="Results" src="https://github.com/user-attachments/assets/82a90f60-8bca-4c3a-a5d9-82dceb3412f4" />
+</div>
+
 ## Repository Structure
 
 -   `n_back_spatial_task.py`: Core script to generate the n-back spatial task dataset.
@@ -48,10 +56,6 @@ jupyter lab
 ```
 
 Then, you can open and run the notebooks (`LSTM_demo.ipynb`, `VanillaRNN_demo.ipynb`, etc.) to see the models in action. Ensure that each notebook resides in the same directory as its corresponding helper function scripts to allow for seamless code execution.
-
-## Results
-
-The notebooks contain the code to train, test the models, and visualize the results. The analysis includes accuracy plots across different 'n' values in the n-back task, t-SNE visualizations of the RNN hidden states to understand how the models represent the grid space, and Pearson correlation analyses to assess whether the similarity between hidden representations reflects the physical distances between locations in the gridworld (whether spatial structure is preserved in the neural network embeddings).
 
 ## License
 
