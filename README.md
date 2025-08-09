@@ -4,7 +4,7 @@
 
 This project explores and compares the performance of different recurrent neural network (RNN) architectures—Vanilla RNN, Long Short-Term Memory (LSTM), and Gated Recurrent Unit (GRU)—on a synthetic spatial memory task. The models are trained on an N-back task set in a 2D grid world, where the model takes random moves (up, down, left or right) in a 5x5 grid world and has to recall its location 'N' steps ago. This repository provides the complete codebase for model implementation, experimental execution, and analysis of memory capacity, spatial representations, and cross-model differences in these representations.
 
-Access our presentation slides [here]([NeuroAI_25\GridVaders\2025-07 NeuroAI Space Invaders Presentation.pdf](https://github.com/neurodidi/GridVaders/blob/ca9f7c682b280b5c31489a3e2cfb357889447a06/2025-07%20NeuroAI%20Space%20Invaders%20Presentation.pdf)
+Access our presentation slides [here](https://github.com/neurodidi/GridVaders/blob/ca9f7c682b280b5c31489a3e2cfb357889447a06/2025-07%20NeuroAI%20Space%20Invaders%20Presentation.pdf).
 
 <div align="center">
   <img alt="GridVaders banner" src="https://github.com/user-attachments/assets/4913e710-1833-4ab3-b81e-6013b3ba903c" />
